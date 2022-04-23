@@ -39,6 +39,8 @@ namespace Northwind.Interface
         //IQueryable listeleme
         IQueryable<TDto> GetQueryable();
 
+        void Save();
+
 
     }
 }

@@ -1,12 +1,14 @@
-﻿using Northwind.Entity.Base;
+﻿using Northwind.Dal.Abstract;
+using Northwind.Entity.Base;
 using Northwind.Entity.IBase;
 using Northwind.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Http;
 
 namespace Northwind.Bll
 {
@@ -16,9 +18,54 @@ namespace Northwind.Bll
         //IServiceProvider
         //GenericRepository
         //Constructor
+
+        #region Variables
+        private readonly IUnitOfWork unitOfWork;
+        private readonly IServiceProvider service;
+        private readonly IGenericRepository<T> repository;
+        #endregion
+
+        #region Constructor
+        public GenericManager(IServiceProvider service)
+        {
+            this.service = service; //service startupdan gelecek
+            unitOfWork = service.GetService<IUnitOfWork>();
+            repository = unitOfWork.GetRepository<T>();
+        }
+        #endregion
+
+        #region Methods
         public IResponse<TDto> Add(TDto item, bool saveChanges = true)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //dto verisi model(T) tipine dönüştürülüyor.
+                //sebebi:dal T ile çalışır.
+                var model = ObjectMapper.Mapper.Map<T>(item);
+                //var resulvesResult = String.Join(',',model.GetType().GetProperties().Select(x=> $"- {x.Name} : {x.GetValue(model) ?? ""} - " ));
+                var result = repository.Add(model);
+
+
+                if (saveChanges)
+                    Save(); // kaydetme işlemi olduğundan transactionı commitliyrouz.
+                            //dönüş tipini ayarlarız
+                return new Response<TDto>
+                {
+                    StatusCode = StatusCodes.Status200OK,
+                    Message = "Success",
+                    Data = ObjectMapper.Mapper.Map<T, TDto>(result)
+                };
+            }
+            catch (Exception ex)
+            {
+                //hata olma durumunda dönecek veri seti
+                return new Response<TDto>
+                {
+                    StatusCode = StatusCodes.Status500InternalServerError,
+                    Message = $"Error:{ex.Message}",
+                    Data = null
+                };
+            }
         }
 
         public Task<IResponse<TDto>> AddAsync(TDto item, bool saveChanges = true)
@@ -28,7 +75,28 @@ namespace Northwind.Bll
 
         public IResponse<bool> DeleteById(int id, bool saveChanges = true)
         {
-            throw new NotImplementedException();
+            try
+            {
+                repository.Delete(id);
+
+                if (saveChanges)
+                    Save();
+                return new Response<bool>
+                {
+                    StatusCode = StatusCodes.Status200OK,
+                    Message = "Success",
+                    Data = true
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<bool>
+                {
+                    StatusCode = StatusCodes.Status500InternalServerError,
+                    Message = $"Error: {ex.Message}",
+                    Data = false
+                };
+            }
         }
 
         public Task<IResponse<bool>> DeleteByIdAsync(int id, bool saveChanges = true)
@@ -56,6 +124,8 @@ namespace Northwind.Bll
             throw new NotImplementedException();
         }
 
+
+
         public IResponse<TDto> Update(TDto item, bool saveChanges = true)
         {
             throw new NotImplementedException();
@@ -65,5 +135,10 @@ namespace Northwind.Bll
         {
             throw new NotImplementedException();
         }
+        public void Save()
+        {
+            unitOfWork.SaveChanges();
+        }
+        #endregion
     }
 }
