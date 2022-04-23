@@ -1,4 +1,4 @@
-﻿using Northwind.Entity.IBase;
+﻿using Northwind.Entity.Base;
 using System;
 using System.Collections.Generic;
 
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Northwind.Entity.Models
 {
-    public partial class AlphabeticalListOfProduct : IEntityBase
+    public partial class AlphabeticalListOfProduct : EntityBase
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }
