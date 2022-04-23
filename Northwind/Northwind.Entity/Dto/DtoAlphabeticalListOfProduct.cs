@@ -22,4 +22,4 @@ namespace Northwind.Entity.Dto
         public string CategoryName { get; set; }
     }
 }
-}
+

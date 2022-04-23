@@ -10,14 +10,14 @@ namespace Northwind.Dal.Concrete.EntityFramework.Context
 
     public partial class NORTHWNDContext : DbContext
     {
-        public NORTHWNDContext()
-        {
-        }
+        //public NORTHWNDContext()
+        //{
+        //}
 
-        public NORTHWNDContext(DbContextOptions<NORTHWNDContext> options)
-            : base(options)
-        {
-        }
+        //public NORTHWNDContext(DbContextOptions<NORTHWNDContext> options)
+        //    : base(options)
+        //{
+        //}
 
         public virtual DbSet<AlphabeticalListOfProduct> AlphabeticalListOfProducts { get; set; }
         public virtual DbSet<Category> Categories { get; set; }

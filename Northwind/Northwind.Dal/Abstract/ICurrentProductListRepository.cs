@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 namespace Northwind.Dal.Abstract
 {
     public interface ICurrentProductListRepository
+    { 
     }
 }

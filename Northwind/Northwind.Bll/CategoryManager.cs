@@ -1,4 +1,6 @@
-﻿using Northwind.Entity.Dto;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Northwind.Dal.Abstract;
+using Northwind.Entity.Dto;
 using Northwind.Entity.Models;
 using Northwind.Interface;
 using System;
@@ -11,5 +13,11 @@ namespace Northwind.Bll
 {
     public class CategoryManager : GenericManager<Category, DtoCategory>, ICategoryService
     {
+        public readonly ICategoryRepository categoryRepository;
+
+        public CategoryManager(IServiceProvider service) : base(service)
+        {
+            categoryRepository = service.GetService<ICategoryRepository>();
+        }
     }
 }

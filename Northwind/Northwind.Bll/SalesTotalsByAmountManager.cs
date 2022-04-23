@@ -6,10 +6,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Northwind.Dal.Abstract;
 
 namespace Northwind.Bll
 {
     public class SalesTotalsByAmountManager : GenericManager<SalesTotalsByAmount, DtoSalesTotalsByAmount>, ISalesTotalsByAmountService
     {
+        public readonly ISalesTotalsByAmountRepository salesTotalsByAmountRepository;
+
+        public SalesTotalsByAmountManager(IServiceProvider service) : base(service)
+        {
+            salesTotalsByAmountRepository = service.GetService<ISalesTotalsByAmountRepository>();
+        }
     }
 }

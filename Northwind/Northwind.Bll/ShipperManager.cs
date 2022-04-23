@@ -6,10 +6,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Northwind.Dal.Abstract;
 
 namespace Northwind.Bll
 {
     public class ShipperManager : GenericManager<Shipper, DtoShipper>, IShipperService
     {
+        public readonly IShipperRepository shipperRepository;
+
+        public ShipperManager(IServiceProvider service) : base(service)
+        {
+            shipperRepository = service.GetService<IShipperRepository>();
+        }
     }
 }

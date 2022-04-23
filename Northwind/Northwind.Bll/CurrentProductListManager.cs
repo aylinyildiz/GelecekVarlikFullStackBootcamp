@@ -1,4 +1,6 @@
-﻿using Northwind.Entity.Dto;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Northwind.Dal.Abstract;
+using Northwind.Entity.Dto;
 using Northwind.Entity.Models;
 using Northwind.Interface;
 using System;
@@ -11,5 +13,11 @@ namespace Northwind.Bll
 {
     public class CurrentProductListManager : GenericManager<CurrentProductList, DtoCurrentProductList>, ICurrentProductListService
     {
+        public readonly ICurrentProductListRepository currentProductListRepository;
+
+        public CurrentProductListManager(IServiceProvider service) : base(service)
+        {
+            currentProductListRepository = service.GetService<ICurrentProductListRepository>();
+        }
     }
 }

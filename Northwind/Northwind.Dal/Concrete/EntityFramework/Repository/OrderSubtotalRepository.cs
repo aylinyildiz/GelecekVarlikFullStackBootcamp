@@ -1,4 +1,4 @@
-﻿,using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Northwind.Dal.Abstract;
 using Northwind.Entity.Models;
 using System;
