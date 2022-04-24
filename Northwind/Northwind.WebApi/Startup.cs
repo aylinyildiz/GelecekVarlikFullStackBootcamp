@@ -42,10 +42,12 @@ namespace Northwind.WebApi
 
             #region ServiceSection
             services.AddScoped<ICustomerService, CustomerManager>();
+            services.AddScoped<IUserService, UserManager>();
             #endregion
 
             #region RepositoryService
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             #endregion
 
             #region UnitOfWork

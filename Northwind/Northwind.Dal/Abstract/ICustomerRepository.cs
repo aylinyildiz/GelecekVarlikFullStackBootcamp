@@ -10,5 +10,7 @@ namespace Northwind.Dal.Abstract
     public interface ICustomerRepository
     {
         IQueryable<Customer> GetTotalReport();
+        //Customer Delete(string id);
+
     }
 }

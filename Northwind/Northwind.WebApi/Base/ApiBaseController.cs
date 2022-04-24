@@ -20,7 +20,7 @@ namespace Northwind.WebApi.Base
             this.service = service;
         }
 
-        [HttpGet("Find")]
+        [HttpGet("GetAll")]
         public IResponse<List<TDto>> GetAll()
         {
             try
@@ -52,6 +52,44 @@ namespace Northwind.WebApi.Base
                     StatusCode = StatusCodes.Status500InternalServerError,
                     Message = $"error:{ex.Message}",
                     Data = null
+                };
+            }
+        }
+
+        [HttpPut("Update")]
+        public IResponse<TDto> Update(TDto entity)
+        {
+            try
+            {
+                return service.Update(entity);
+            }
+            catch (Exception ex)
+            {
+                return new Response<TDto>
+                {
+                    StatusCode = StatusCodes.Status500InternalServerError,
+                    Message = $"error:{ex.Message}",
+                    Data = null
+                };
+            }
+        }
+
+
+
+        [HttpDelete("Delete")]
+        public IResponse<bool> Delete(int id)
+        {
+            try
+            {
+                return service.DeleteById(id);
+            }
+            catch (Exception ex)
+            {
+                return new Response<bool>
+                {
+                    StatusCode = StatusCodes.Status500InternalServerError,
+                    Message = $"error:{ex.Message}",
+                    Data = false
                 };
             }
         }

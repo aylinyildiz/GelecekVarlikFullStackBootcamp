@@ -24,7 +24,6 @@ namespace Northwind.WebApi.Controller
         }
         
         [HttpGet("GetTotalReport")] //abc.com/api/customer/GetTotalReport
-
         public IResponse<IQueryable<DtoCustomer>> GetTotalReport()
         {
             try
@@ -43,5 +42,23 @@ namespace Northwind.WebApi.Controller
             }
             
         }
+
+        //[HttpDelete("DeleteC")]
+        //public IResponse<DtoCustomer> Delete(string id)
+        //{
+        //    try
+        //    {
+        //        return customerService.Delete(id);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new Response<DtoCustomer>
+        //        {
+        //            StatusCode = StatusCodes.Status500InternalServerError,
+        //            Message = $"Error:{ex.Message}",
+        //            Data = null
+        //        };
+        //    }
+        //}
     }
 }

@@ -20,5 +20,9 @@ namespace Northwind.Dal.Concrete.EntityFramework.Repository
         {
             return dbset.AsQueryable<Customer>();
         }
+        //public Customer Delete(string id)
+        //{
+        //    return dbset.Remove(id);
+        //}
     }
 }

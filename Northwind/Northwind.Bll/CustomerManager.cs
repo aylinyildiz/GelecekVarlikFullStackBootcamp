@@ -48,5 +48,30 @@ namespace Northwind.Bll
                 };
             }
         }
+
+        //public IResponse<DtoCustomer> Delete(string id)
+        //{
+        //    try
+        //    {
+        //        var entity = ObjectMapper.Mapper.Map<DtoCustomer>(customerRepository.Delete(id));
+        //        return new Response<DtoCustomer>
+        //        {
+        //            StatusCode = StatusCodes.Status200OK,
+        //            Message = "success",
+        //            Data = entity
+        //        };
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        return new Response<DtoCustomer>
+        //        {
+        //            StatusCode = StatusCodes.Status500InternalServerError,
+        //            Message = $"error:{ex.Message}",
+        //            Data = null
+        //        };
+        //    }
+
+        //}
     }
 }

@@ -12,5 +12,6 @@ namespace Northwind.Interface
     public interface ICustomerService : IGenericService<Customer, DtoCustomer>
     {
         IResponse<IQueryable<DtoCustomer>> GetTotalReport();
+        //IResponse<DtoCustomer> Delete(string id);
     }
 }
