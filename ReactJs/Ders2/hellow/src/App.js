@@ -1,5 +1,8 @@
 import "./App.css";
 import { useState } from "react";
+import {Ekle} from './components/Ekle'
+import {Layout} from './components/Layout'
+import {Listele} from './components/Listele'
 
 function App() {
   const [kisiler, setKisiler] = useState([]);
@@ -11,90 +14,27 @@ function App() {
   };
   return (
     <div className="App">
-      <div
-        style={{
-          border: "1px solid black",
-          width: "900px",
-          height: "900px",
-          flexDirection: "column",
-          display: "flex",
-          margin: "auto",
-        }}
-      >
-        <div
-          style={{
-            border: "1px solid black",
-            width: "900px",
-            height: "100px",
-          }}
-        >
-          başlık
-        </div>
-        <div
-          style={{
-            border: "1px solid black",
-            width: "900px",
-            flexGrow: "1",
-            flexDirection: "row",
-            display: "flex",
-          }}
-        >
-          <div
-            style={{
-              border: "1px solid black",
-              width: "200px",
-            }}
-          >
+      {/* <div className="container">
+        <div className="baslik">başlık</div>
+        <div className="content">
+          <div className="sol">
             <Ekle onSave={handleKisiEkle} />
             <Listele list={kisiler} />
           </div>
-          <div
-            style={{
-              border: "1px solid black",
-              flexGrow: "1",
-            }}
-          >
+          <div className="sag"  >
             sağ
           </div>
         </div>
-      </div>
+      </div> */}
+      <Layout sol={<><Ekle onSave={handleKisiEkle} />
+            <Listele list={kisiler} /></>}
+              sag={"sag"}
+              baslik={"baslik artık prop"}
+            />
     </div>
   );
 }
 
-//tıklama => event, karşılığı => handler
-function Ekle({ onSave }) {
-  const [isim, setIsim] = useState("");
-  return (
-    <>
-      <input
-      value={isim} // value ya ismi dinletmek gerekiyor
-        onChange={(e) => {
-          setIsim(e.target.value);
-        }}
-      />
-      <button
-        onClick={() => {
-          onSave(isim);
-          setIsim("");//inputun içini boşaltması için
-        }}
-      >
-        Ekle
-      </button>
-    </>
-  );
-}
 
-function Listele({ list }) {
-  return (
-    <ul>
-      {list.map((kisi) => (
-        <li>
-          {kisi.name} - {kisi.number}
-        </li>
-      ))}
-    </ul>
-  );
-}
 
 export default App;
