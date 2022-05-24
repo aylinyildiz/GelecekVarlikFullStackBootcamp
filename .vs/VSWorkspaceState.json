@@ -1,7 +1,16 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Northwind",
+    "\\Northwind\\Northwind.Entity",
+    "\\Northwind\\Northwind.Entity\\Dto",
+    "\\Northwind\\Northwind.Entity\\IBase",
+    "\\Northwind\\Northwind.Entity\\Mapper",
+    "\\Northwind\\Northwind.Interface",
+    "\\Northwind\\Northwind.WebApi",
+    "\\Northwind\\Northwind.WebApi\\Base",
+    "\\Northwind\\Northwind.WebApi\\Controllers"
   ],
-  "SelectedNode": "\\.gitignore",
+  "SelectedNode": "\\Northwind\\Northwind.Entity\\Dto\\DtoLogin.cs",
   "PreviewInSolutionExplorer": false
 }
