@@ -4,7 +4,10 @@ import { useState } from "react";
 function App() {
   const [kisiler, setKisiler] = useState([]);
   const handleKisiEkle = (isim) => {
-    setKisiler([...kisiler, {name:isim, number: Math.ceil(Math.random()*100)+1}]);
+    setKisiler([
+      ...kisiler,
+      { name: isim, number: Math.ceil(Math.random() * 100) + 1 },
+    ]);
   };
   return (
     <div className="App">
@@ -42,7 +45,8 @@ function App() {
               width: "200px",
             }}
           >
-            <SolListe onSave={handleKisiEkle} />
+            <Ekle onSave={handleKisiEkle} />
+            <Listele list={kisiler} />
           </div>
           <div
             style={{
@@ -59,17 +63,37 @@ function App() {
 }
 
 //tıklama => event, karşılığı => handler
-function SolListe({ onSave }) {
-  const [isim, setIsim] = useState('');
+function Ekle({ onSave }) {
+  const [isim, setIsim] = useState("");
   return (
     <>
       <input
+      value={isim} // value ya ismi dinletmek gerekiyor
         onChange={(e) => {
           setIsim(e.target.value);
         }}
       />
-      <button onClick={() => onSave(isim)}>Ekle</button>
+      <button
+        onClick={() => {
+          onSave(isim);
+          setIsim("");//inputun içini boşaltması için
+        }}
+      >
+        Ekle
+      </button>
     </>
+  );
+}
+
+function Listele({ list }) {
+  return (
+    <ul>
+      {list.map((kisi) => (
+        <li>
+          {kisi.name} - {kisi.number}
+        </li>
+      ))}
+    </ul>
   );
 }
 
